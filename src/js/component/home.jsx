@@ -1,24 +1,58 @@
 import React from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import { useState, useEffect } from "react";
 
 //create your first component
 const Home = () => {
+	const [entrada, setEntrada] = useState([]);
+	const [datos, setDatos] = useState(" ");
+
+	useEffect(() => {
+		console.log(entrada);
+	}, [entrada]);
+
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="text-center bg-white container my-3 mt-5">
+			<h1>toDo List</h1>
+			<div>
+				<input
+					type="text"
+					placeholder="Add toDo list"
+					onChange={e => {
+						setDatos(e.target.value);
+					}}
+					onKeyDown={e => {
+						//console.log(typeof e.key);
+						if (e.key === "Enter" && datos != " ") {
+							setEntrada([...entrada, datos]);
+							setDatos(" ");
+						}
+					}}
+					value={datos}
+				/>
+
+				<div>
+					{entrada.map((index, key) => {
+						return (
+							<>
+								<ul className="list-group">
+									<li className="list-group-item" key={key}>
+										{index}
+										<a
+											onClick={() => {
+												entrada.splice(key, 1);
+												setEntrada([...entrada]);
+												console.log(entrada);
+											}}>
+											<i className=" far fa-times-circle mb-3"></i>
+										</a>
+									</li>
+								</ul>
+							</>
+						);
+					})}
+				</div>
+			</div>
 		</div>
 	);
 };
