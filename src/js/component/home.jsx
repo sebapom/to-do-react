@@ -13,11 +13,11 @@ const Home = () => {
 
 	return (
 		<div className="text-center bg-white container my-3 mt-5">
-			<h1>toDo List</h1>
+			<h1>to-do List</h1>
 			<div>
 				<input
 					type="text"
-					placeholder="Add toDo list"
+					placeholder="Add to-do list"
 					onChange={e => {
 						setDatos(e.target.value);
 					}}
